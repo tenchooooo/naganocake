@@ -1,0 +1,10 @@
+<h2>商品詳細</h2>
+ <%= attachment_image_tag @item, :image, format: 'jpeg', size: '300x200' %>
+<p>商品名  <span><%= @item.name %></span></p>
+<p>商品説明  <span><%= @item.introduction %></span></p>
+<p>ジャンル  <span><%= @item.genre.name %></span></p>
+<p>税込価格  </p>
+<p>（税抜価格）</p>
+<% tax = @item.price * 1.1 %>
+<p><%= tax.to_i %>(<%= @item.price %>)</p>
+<p>販売ステータス  <span><%= @item.is_active ? '販売中' : '販売停止中' %></span></p>
