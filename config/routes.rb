@@ -8,11 +8,8 @@ Rails.application.routes.draw do
   devise_for :admin, skip:[:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
-  resources :customers, only: [:show, :edit, :update,], controllers: {
-    customers: "public/customers"
-  }
-  get '/customers' => 'public/customers#confirm'
-  patch '/customers/withdraw' => 'public/customers#withdraw'
+  get 'items' => 'public/items#index'
+  get '/item/:id' => 'public/itesm#show', as: :item
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   namespace :admin do
     resources :genres, only: [:index, :create, :edit, :update]
