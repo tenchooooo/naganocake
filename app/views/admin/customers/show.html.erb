@@ -1,0 +1,14 @@
+<% name = @customer.last_name + @customer.first_name %>
+<h2><%= name %>さんの会員詳細</h2>
+
+<p>会員ID　<span><%= @customer.id %></span></p>
+<p>氏名　<span><%= @customer.last_name %></span>  <span><%= @customer.first_name %></span></p>
+<p>フリガナ　<span><%= @customer.last_name_kana %></span>  <span><%= @customer.first_name_kana %></span></p>
+<p>郵便番号　<span><%= @customer.postal_code %></span></p>
+<p>住所　<span><%= @customer.address %></span></p>
+<p>電話番号　<span><%= @customer.telephone_number %></span></p>
+<p>メールアドレス　<span><%= @customer.email %></span></p>
+<p>会員ステータス　<span><%= @customer.is_deleted ? '無効' : '有効'%></span></p>
+<%= link_to edit_admin_customer_path(@customer.id) do %>
+<p>編集する</p>
+<% end %>

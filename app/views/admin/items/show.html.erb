@@ -8,3 +8,6 @@
 <% tax = @item.price * 1.1 %>
 <p><%= tax.to_i %>(<%= @item.price %>)</p>
 <p>販売ステータス  <span><%= @item.is_active ? '販売中' : '販売停止中' %></span></p>
+<%= link_to edit_admin_item_path(@item.id) do %>
+<p>編集する</p>
+<% end %>
