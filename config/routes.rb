@@ -9,7 +9,8 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
   get 'items' => 'public/items#index'
-  get '/item/:id' => 'public/itesm#show', as: :item
+  get 'items/:id' => 'public/items#show', as: :item
+  get 'cart_items' => 'public/cart_items#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   namespace :admin do
     resources :genres, only: [:index, :create, :edit, :update]
