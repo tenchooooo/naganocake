@@ -1,21 +1,25 @@
 <h2>ショッピングカート</h2>
+<%= link_to "カートを空にする", destroy_all_cart_items_path, method: :delete ,"data-confirm" => "本当に消しますか？" %>
 <table>
-    <tr>
+  <tr>
     <th>商品名</th>
     <th>単価(税込)</th>
     <th>数量</th>
     <th>小計</th>
     <th></th>
-</tr>
-<% @cart_items.each do |cart_item| %>
-<tr>
+  </tr>
+  <% @cart_items.each do |cart_item| %>
+  <tr>
     <td><%= attachment_image_tag cart_item.item, :image, format: 'jpeg', size: '100x60' %><%= cart_item.item.name %></td>
-    <td></td>
-      <td><%= form_with model: cart_item ,url: cart_item_path(cart_item.id), method: :patch do |f| %>
-        <%= f.select :amount, *[1..10], :selected => cart_item.amount%>
+    <td><%= cart_item.item.with_tax_price.to_s(:delimited) %></td>
+    <td><%= form_with model: cart_item ,url: cart_item_path(cart_item.id), method: :patch do |f| %>
+      <%= f.select :amount, *[1..10], :selected => cart_item.amount %>
       <%= f.submit "変更" %>
       <% end %></td>
-    <td></td>
+    <td><%= cart_item.subtotal.to_s(:delimited) %></td>
+    <td><%= link_to "削除する", cart_item_path(cart_item.id), method: :delete ,"data-confirm" => "本当に消しますか？" %></td>
+  </tr>
+  <% @total += cart_item.subtotal %>
 <% end %>
-</tr>
 </table>
+<p>合計金額</p><%= @total.to_s(:delimited) %>

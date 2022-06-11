@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   }
   scope module: :public do
     resources :items, only: [:index, :show]
-    resources :cart_items, only: [:index, :create, :update]
+    resources :cart_items, only: [:index, :create, :update, :destroy] do
+      collection do
+        delete 'destroy_all'
+      end
+    end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   namespace :admin do
