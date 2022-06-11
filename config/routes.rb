@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get 'items' => 'public/items#index'
   get 'items/:id' => 'public/items#show', as: :item
   get 'cart_items' => 'public/cart_items#index'
+  post 'cart_items' =>'public/cart_items#create'
+  patch 'cart_items/:id' => 'public/cart_items#update'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   namespace :admin do
     resources :genres, only: [:index, :create, :edit, :update]
