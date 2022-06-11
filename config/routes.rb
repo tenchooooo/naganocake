@@ -15,6 +15,12 @@ Rails.application.routes.draw do
         delete 'destroy_all'
       end
     end
+    resources :orders, only: [:new, :create, :index, :show] do
+      collection do
+        post 'confirm'
+        get 'complete'
+      end
+    end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   namespace :admin do
