@@ -1,4 +1,7 @@
 class Public::CustomersController < ApplicationController
-  def new
+  def show
+  end
+  
+  def edit
   end
 end

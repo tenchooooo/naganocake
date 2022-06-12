@@ -15,12 +15,22 @@ Rails.application.routes.draw do
         delete 'destroy_all'
       end
     end
+
     resources :orders, only: [:new, :create, :index, :show] do
       collection do
         post 'confirm'
         get 'complete'
       end
     end
+
+    resource :customers, only: [:update] do
+      collection do
+        get 'unsubscribe'
+        patch 'withdraw'
+      end
+    end
+    get '/customers/my_page' => 'customers#show'
+    get '/customers/my_page/edit' => 'customers#edit'
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   namespace :admin do
