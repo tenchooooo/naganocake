@@ -5,7 +5,7 @@ class Public::CartItemsController < ApplicationController
   end
 
   def create
-    #binding.pry
+    # binding.pry
     @new_cart_item = CartItem.new(cart_item_params)
     if CartItem.find_by(item_id: params[:cart_item][:item_id]) #find_byでcart_item_paramsのitem_idを探し出す。
       @cart_item = CartItem.find_by(item_id: params[:cart_item][:item_id]) #item_idが一致していた場合、@cart_itemに代入
