@@ -5,10 +5,10 @@ class Public::CartItemsController < ApplicationController
   end
 
   def create
-    # binding.pry
+    #binding.pry
     @new_cart_item = CartItem.new(cart_item_params)
-    if CartItem.find_by(item_id: params[:cart_item][:item_id]) #find_byでcart_item_paramsのitem_idを探し出す。
-      @cart_item = CartItem.find_by(item_id: params[:cart_item][:item_id]) #item_idが一致していた場合、@cart_itemに代入
+    @cart_item = CartItem.where(item_id: params[:cart_item][:item_id],customer_id: current_customer.id).first #whereでcart_item_paramsのitem_idとcurrent.idを探す
+    if @cart_item.present? #存在してればtrue,してなければ
       @cart_item.amount += @new_cart_item.amount.to_i #既存の数字に足す。文字列になっている可能性があるのでto_iでintegerとする。
       @cart_item.update(amount: @cart_item.amount) #アップデートする。amountだけなので、（カラム名：インスタンス名.数とする。）
       redirect_to cart_items_path
