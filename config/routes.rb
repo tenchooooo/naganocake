@@ -22,12 +22,16 @@ Rails.application.routes.draw do
         get 'complete'
       end
     end
+
+    resources :addresses, only: [:index, :edit, :create, :update, :destroy] do
+    end
+
     get '/customers/my_page' => 'customers#show'
     get '/customers/my_page/edit' => 'customers#edit'
     patch '/customers/my_page' =>'customers#update'
     get '/customers/unsubscribe' => 'customers#unsubscribe'
     patch '/customers/withdraw' => 'customers#withdraw'
-    
+
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   namespace :admin do
