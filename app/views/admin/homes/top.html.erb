@@ -8,7 +8,7 @@
   </tr>
   <% @orders.each do |order| %>
   <tr>
-    <td><%= order.created_at.to_s(:datetime_jp2) %></td>
+    <td><%= link_to order.created_at.to_s(:datetime_jp2), admin_order_path(order.id) %></td>
     <td><%= order.customer.full_name %></td>
     <td><% order.order_details.each do |order_detail| %>
     <%= order_detail.amount %>
