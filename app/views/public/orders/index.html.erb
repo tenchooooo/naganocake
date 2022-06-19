@@ -10,7 +10,7 @@
   </tr>
   <% @orders.each do |order| %>
   <tr>
-    <td><%= order.created_at %></td>
+    <td><%= order.created_at.to_s(:datetime_jp) %></td>
     <td>〒<%= order.postal_code %> <br>
     <%= order.address %> <br>
     <%= order.name %>
