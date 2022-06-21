@@ -40,6 +40,7 @@ Rails.application.routes.draw do
     resources :customers, only: [:index, :show, :edit, :update]
     root to: "homes#top"
     resources :orders, only:[:show, :update]
+    resources :order_details, only:[:update]
   end
 
 end
