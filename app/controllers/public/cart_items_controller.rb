@@ -1,4 +1,5 @@
 class Public::CartItemsController < ApplicationController
+  before_action :authenticate_customer!
   def index
     @cart_items = current_customer.cart_items #Customer.allだと客すべてのカートアイテム表示になる。
     @total = 0 #0で数字を入れると宣言する
@@ -16,7 +17,6 @@ class Public::CartItemsController < ApplicationController
       if @new_cart_item.save
         redirect_to cart_items_path
       else
-
       end
     end
   end
@@ -31,7 +31,7 @@ class Public::CartItemsController < ApplicationController
     @cart_item.destroy
     redirect_to cart_items_path
   end
-  
+
   def destroy_all
     @cart_items = current_customer.cart_items
     @cart_items.destroy_all

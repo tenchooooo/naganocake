@@ -5,27 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <header>
-    <% if customer_signed_in? %>
-      <li>
-        <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+  <body >
+    <header class= >
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class= "navbar-brand" href="/">
+    <%= image_tag "img2.JPG" %>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <!--会員でログイン時-->
+      <% if customer_signed_in? %>
+      <li class="nav-item">
+        <button type="button" class="btn btn-outline-primary btn-sm"> <%= link_to "マイページ", customers_my_page_path %></button>
       </li>
-    <% else %>
-      <li>
-        <%= link_to "新規登録", new_customer_registration_path %>
+      <li class="nav-item ml-5">
+        <button type="button" class="btn btn-outline-primary btn-sm"> <%= link_to "商品一覧", items_path %> </button>
       </li>
-      <li>
-        <%= link_to "ログイン", new_customer_session_path %>
+      <li class="nav-item ml-5">
+        <button type="button" class="btn btn-outline-primary btn-sm"> <%= link_to "カート", cart_items_path %> </button>
       </li>
-    <% end %>
+      <li class="nav-item ml-5 mr-5">
+        <button type="button" class="btn btn-outline-primary btn-sm"> <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %> </button>
+      </li>
+      <!--管理者でログイン時-->
+      <% elsif admin_signed_in? %>
+      <li class="nav-item">
+        <button type="button" class="btn btn-outline-primary btn-sm"> <%= link_to "商品一覧", admin_items_path %></button>
+      </li>
+      <li class="nav-item ml-5">
+        <button type="button" class="btn btn-outline-primary btn-sm"> <%= link_to "会員一覧", admin_customers_path %> </button>
+      </li>
+      <li class="nav-item ml-5">
+        <button type="button" class="btn btn-outline-primary btn-sm"> <%= link_to "注文履歴一覧", admin_root_path %> </button>
+      </li>
+      <li class="nav-item ml-5">
+        <button type="button" class="btn btn-outline-primary btn-sm"> <%= link_to "商品一覧", admin_items_path %></button>
+      </li>
+      <li class="nav-item ml-5 mr-5">
+        <button type="button" class="btn btn-outline-primary btn-sm"> <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %> </button>
+      </li>
+      <!--ログイン前-->
+      <% else %>
+      <li class="nav-item">
+        <button type="button" class="btn btn-outline-primary btn-sm"> <%= link_to "About", about_path %></button>
+      </li>
+      <li class="nav-item ml-5">
+        <button type="button" class="btn btn-outline-primary btn-sm"> <%= link_to "商品一覧",items_path %> </button>
+      </li>
+      <li class="nav-item ml-5">
+        <button type="button" class="btn btn-outline-primary btn-sm"> <%= link_to "新規登録", new_customer_registration_path %> </button>
+      </li>
+      <li class="nav-item ml-5 mr-5">
+        <button type="button" class="btn btn-outline-primary btn-sm"> <%= link_to "ログイン", new_customer_session_path %></button>
+      <% end %>
+      </li>
+    </ul>
+  </div>
+</nav>
     </header>
     <%= yield %>
-    
+
   </body>
 </html>

@@ -1,13 +1,13 @@
 <h2>商品詳細</h2>
- <%= attachment_image_tag @item, :image, format: 'jpeg', size: '300x200' %>
-<p>商品名  <span><%= @item.name %></span></p>
-<p>商品説明  <span><%= @item.introduction %></span></p>
-<p>ジャンル  <span><%= @item.genre.name %></span></p>
-<p>税込価格  </p>
-<p>（税抜価格）</p>
-<% tax = (@item.price * 1.1).floor %>
-<p><%= tax %>(<%= @item.price %>)</p>
-<p>販売ステータス  <span><%= @item.is_active ? '販売中' : '販売停止中' %></span></p>
-<%= link_to edit_admin_item_path(@item.id) do %>
-<p>編集する</p>
-<% end %>
+<%= attachment_image_tag @item, :image, format: 'jpeg', size: '300x200' %>
+<table>
+  <tr><th>商品名</th><td><%= @item.name %></td></tr>
+  <tr><th>商品説明</th><td><%= @item.introduction %></td></tr>
+  <tr><th>ジャンル</th><td><%= @item.genre.name %></td></tr>
+  <tr><th>税込価格<br>(税抜価格)</th><td>
+    <% tax = (@item.price * 1.1).floor.to_s(:delimited) %>
+    <%= tax %>(<%= @item.price.to_s(:delimited) %>)円
+  </td></tr>
+  <tr><th>販売ステータス</th><td><%= @item.is_active ? '販売中' : '販売停止中' %></td></tr>
+</table>
+<%= link_to "編集する", edit_admin_item_path(@item.id) %>

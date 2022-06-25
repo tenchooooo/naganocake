@@ -1,34 +1,36 @@
 <h2>注文履歴詳細</h2>
 <table>
   <p>注文情報</p>
-  <tr><th>注文日</th><td><%= @order_detail.created_at.to_s(:datetime_jp) %></td></tr>
-  <tr><th>転送先</th><td>〒<%= @order_detail.order.postal_code %> <br>
-  <%= @order_detail.order.address %> <br>
-  <%= @order_detail.order.name %></td></tr>
-  <tr><th>支払方法</th><td><%= @order_detail.order.payment_method_i18n %></td></tr>
-  <tr><th>ステータス</th><td><%=  %></td></tr>
+  <tr><th>注文日</th><td><%= @order.created_at.to_s(:datetime_jp) %></td></tr>
+  <tr><th>転送先</th><td>〒<%= @order.postal_code %> <br>
+  <%= @order.address %> <br>
+  <%= @order.name %></td></tr>
+  <tr><th>支払方法</th><td><%= @order.payment_method_i18n %></td></tr>
+  <tr><th>ステータス</th><td><%= @order.status_i18n %></td></tr>
 </table>
 <table>
   <p>請求金額</p>
-  <tr><th>商品合計</th><td><%= @order_detail.order.total_payment - @order_detail.order.shipping_cost %></td></tr>
-  <tr><th>配送料</th><td><%= @order_detail.order.shipping_cost %></td></tr>
-  <tr><th>ご請求額</th><td><%= @order_detail.order.total_payment %></td></tr>
+  <% @total =  @order.total_payment - @order.shipping_cost %>
+  <tr><th>商品合計</th><td><%= @total.to_s(:delimited)%></td></tr>
+  <tr><th>配送料</th><td><%= @order.shipping_cost.to_s(:delimited) %></td></tr>
+  <tr><th>ご請求額</th><td><%= @order.total_payment.to_s(:delimited) %></td></tr>
 </table>
 <table>
-  <p>注文内容</p>
+
    <tr>
+    <p>注文内容</p>
     <th>商品名</th>
     <th>単価(税込)</th>
     <th>個数</th>
     <th>小計</th>
     <th></th>
   </tr>
+  <% @order.order_details.each do |order_detail| %>
   <tr>
-    <!--% @order_detail.each do |order_detail| %>-->
-    <td><%= @order_detail.item.name %></td>
-    <td><%= @order_detail.item.with_tax_price.to_s(:delimited) %></td>
-    <td><%= @order_detail.amount %></td></td>
-    <td><%= (@order_detail.item.with_tax_price * @order_detail.amount).to_s(:delimited) %></td>
-    <!--% end %>-->
+    <td><%= order_detail.item.name %></td>
+    <td><%= order_detail.item.with_tax_price.to_s(:delimited) %></td>
+    <td><%= order_detail.amount %></td></td>
+    <td><%= (order_detail.item.with_tax_price * order_detail.amount).to_s(:delimited) %></td>
   </tr>
+  <% end %>
 </table>
