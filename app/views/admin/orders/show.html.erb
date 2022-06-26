@@ -12,6 +12,7 @@
       <% end %>
     </td></tr>
 </table>
+<% @order.order_details.each do |order_detail| %>
 <table>
   <tr>
     <th>商品名</th>
@@ -20,7 +21,7 @@
     <th>小計</th>
     <th></th>
   </tr>
-    <% @order.order_details.each do |order_detail| %>
+
   <tr>
     <td><%= order_detail.item.name %></td>
     <td><%= order_detail.item.with_tax_price %></td>
@@ -32,5 +33,12 @@
       <% end %>
     </td>
   </tr>
+</table>
+<% @total += (order_detail.item.with_tax_price * order_detail.amount) %>
   <% end %>
+<table>
+  <tr><th>商品合計</th><td><%= @total.to_s(:delimited) %></td></tr>
+  <tr><th>送料</th><td><%= @order.shipping_cost %></td></tr>
+  <% @total_payment= @total + @order.shipping_cost %>
+  <tr><th>請求金額</th><td><%= total_payment = @total_payment.to_s(:delimited) %></td></tr>
 </table>
