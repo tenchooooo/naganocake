@@ -1,8 +1,8 @@
 <h2>配送先編集</h2>
-<table>
 <%= form_with model: @address, url: address_path, method: :patch do |f| %>
+<table>
   <tr><th>郵便番号（ハイフンなし）</th><td><%= f.text_field :postal_code %></td></tr>
   <tr><th>住所</th><td><%= f.text_area :address %></td></tr>
   <tr><th>宛名</th><td><%= f.text_field :name %><%= f.submit "変更内容を保存" %></td></tr>
-<% end %>
 </table>
+<% end %>
