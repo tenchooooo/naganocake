@@ -1,22 +1,29 @@
-<h2>商品一覧</h2>
-<%= link_to "+", new_admin_item_path %>
-<table>
-    <tr>
-    <th>商品ID</th>
-    <th>商品名</th>
-    <th>税抜価格</th>
-    <th>ジャンル</th>
-    <th>ステータス</th>
-</tr>
-<% @items.each do |item| %>
-<tr>
-    <td>
-        <%= item.id %>
-    </td>
-    <td><%= link_to item.name, admin_item_path(item.id) %></td>
-    <td><%= item.price %></td>
-    <td><%= item.genre.name %></td>
-    <td><%= item.is_active ? '販売中' : '販売停止中' %></td>
-<% end %>
-</tr>
-</table>
+<div class="container">
+  <div class="row">
+    <h2 class="col-5">商品一覧</h2>
+    <div class="btn btn-light rounded-circle p-0 ml-auto" style="width:2rem;height:2rem;">
+      <%= link_to "+", new_admin_item_path %>
+    </div>
+   
+    <table class="table table-borderless">
+      <tr>
+        <th>商品ID</th>
+        <th>商品名</th>
+        <th>税抜価格</th>
+        <th>ジャンル</th>
+        <th>ステータス</th>
+      </tr>
+      <% @items.each do |item| %>
+      <tr>
+        <td>
+          <%= item.id %>
+        </td>
+        <td><%= link_to item.name, admin_item_path(item.id) %></td>
+        <td><%= item.price %></td>
+        <td><%= item.genre.name %></td>
+        <td><%= item.is_active ? '販売中' : '販売停止中' %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

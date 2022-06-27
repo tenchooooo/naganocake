@@ -1,14 +1,49 @@
-<% name = @customer.last_name + @customer.first_name %>
-<h2><%= name %>さんの会員詳細</h2>
+<div class="container">
+  <h2><%= @customer.full_name %>さんの会員詳細</h2>
+  <div class="row">
+    <table class="table table">
+      <tr>
+        <th>会員ID</th>
+        <td><%= @customer.id %></td>
+      </tr>
+      <tr>
+        <th>氏名</th>
+        <td><%= @customer.full_name %></td>
+      </tr>
+      <tr>
+        <th>フリガナ</th>
+        <td><%= @customer.full_name_kana %></td>
+      </tr>
+      <tr>
+        <th>郵便番号</th>
+        <td><%= @customer.postal_code %></td>
+      </tr>
+      <tr>
+        <th>住所</th>
+        <td><%= @customer.address %></td>
+      </tr>
+      <tr>
+        <th>電話番号</th>
+        <td><%= @customer.telephone_number %></td>
+      </tr>
+      <tr>
+        <th>メールアドレス</th>
+        <td><%= @customer.email %></td>
+      </tr>
+      <tr>
+        <th>会員ステータス</th>
+        <td><%= @customer.is_deleted ? '無効' : '有効'%></td>
+      </tr>
+      <tr>
+        <th></th>
+        <td>
+          <%= link_to "編集する", edit_admin_customer_path(@customer.id), class:'btn btn-success' %>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
 
-<p>会員ID　<span><%= @customer.id %></span></p>
-<p>氏名　<span><%= @customer.last_name %></span>  <span><%= @customer.first_name %></span></p>
-<p>フリガナ　<span><%= @customer.last_name_kana %></span>  <span><%= @customer.first_name_kana %></span></p>
-<p>郵便番号　<span><%= @customer.postal_code %></span></p>
-<p>住所　<span><%= @customer.address %></span></p>
-<p>電話番号　<span><%= @customer.telephone_number %></span></p>
-<p>メールアドレス　<span><%= @customer.email %></span></p>
-<p>会員ステータス　<span><%= @customer.is_deleted ? '無効' : '有効'%></span></p>
-<%= link_to edit_admin_customer_path(@customer.id) do %>
-<p>編集する</p>
-<% end %>
+
+
+

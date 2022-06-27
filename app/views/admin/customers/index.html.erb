@@ -1,19 +1,24 @@
-<table>
-    <tr>
-    <th>会員ID</th>
-    <th>氏名</th>
-    <th>メールアドレス</th>
-    <th>ステータス</th>
-</tr>
-<% @customers.each do |customer| %>
-<tr>
-    <td>
-        <%= customer.id %>
-    </td>
-    <% name = customer.last_name + customer.first_name %>
-    <td><%= link_to name, admin_customer_path(customer.id) %></td>
-    <td><%= customer.email %></td>
-    <td><%= customer.is_deleted ? '無効' : '有効'%></td>
-<% end %>
-</tr>
-</table>
+<div class="container">
+  <h3>会員一覧</h3>
+  <div class="row">
+    <table class="table table-borderless">
+      <tr>
+        <th>会員ID</th>
+        <th>氏名</th>
+        <th>メールアドレス</th>
+        <th>ステータス</th>
+      </tr>
+      <% @customers.each do |customer| %>
+      <tr>
+        <td>
+          <%= customer.id %>
+        </td>
+        <% name = customer.last_name + customer.first_name %>
+        <td><%= link_to name, admin_customer_path(customer.id) %></td>
+        <td><%= customer.email %></td>
+        <td><%= customer.is_deleted ? '無効' : '有効'%></td>
+        <% end %>
+      </tr>
+    </table>
+  </div>
+</div>
