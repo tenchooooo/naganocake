@@ -16,11 +16,12 @@
           <td><%= cart_item.amount %></td></td>
           <td><%= cart_item.subtotal.to_s(:delimited) %></td>
         </tr>
+         <% @total += cart_item.subtotal %>
+         <% end %>
       </table>
     </div>
 
-      <% @total += cart_item.subtotal %>
-      <% end %>
+
     <table class="table table-bordered col-4">
       <tr><th>送料</th><td><%= @order.shipping_cost %></td></tr>
       <tr><th>商品合計</th><td><%= @total.to_s(:delimited) %></td></tr>
@@ -29,7 +30,7 @@
     </table>
     <table class="table table-borderless">
       <tr><th class="text-center">支払方法</th><td><%= @order.payment_method_i18n %></td></tr>
-      <tr><th class="text-center">お届け先</th><td><%= @order.postal_code %><%= @order.address %> <br>
+      <tr><th class="text-center">お届け先</th><td>〒<%= @order.postal_code %>　<%= @order.address %> <br>
       <%= @order.name %></td></tr>
     </table>
   </div>
@@ -41,9 +42,9 @@
     <%= f.hidden_field :shipping_cost, value: @order.shipping_cost %>
     <%= f.hidden_field :total_payment, value: @total_payment %>
   <div class="row">
-    <div>
-      <%= f.submit "注文を確定する" ,class:'btn btn-success mx-auto'%>
-    </div>
+    <% if @total_payment != 800 %>
+     <%= f.submit "注文を確定する" ,class:'btn btn-success mx-auto'%>
+     <% end %>
     <% end %>
   </div>
 

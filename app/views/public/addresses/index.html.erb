@@ -1,28 +1,39 @@
-<h2>配送先登録/一覧</h2>
-<%= form_with model: @address, url: addresses_path, method: :post do |f| %>
-<table>
-  <tr><th>郵便番号（ハイフンなし）</th><td> <%= f.text_field :postal_code %></td></tr>
-  <tr><th>住所</th><td> <%= f.text_area :address %></td></tr>
-  <tr><th>宛名</th><td> <%= f.text_field :name %></td></tr>
-</table>
-<%= f.hidden_field :customer_id, :value => current_customer.id %>
-<%= f.submit "新規登録" %>
-<% end %>
-
-<table>
-    <tr>
-    <th>郵便番号</th>
-    <th>住所</th>
-    <th>宛名</th>
-    <th></th>
-  </tr>
+<div class="container">
+  <h4>配送先登録/一覧</h4>
+  <%= form_with model: @address, url: addresses_path, method: :post do |f| %>
+  <table class="table table-borderless">
+    <col class="col-3">
+    <col class="col-3">
+    <col class="col-3">
+    <tr><th>郵便番号（ハイフンなし）</th><td> <%= f.text_field :postal_code %></td></tr>
+    <tr><th>住所</th><td> <%= f.text_field :address, class:'col-12' %></td></tr>
+    <tr><th>宛名</th><td> <%= f.text_field :name %></td></tr>
+  </table>
+  <div class="row">
+    <%= f.hidden_field :customer_id, :value => current_customer.id %>
+    <%= f.submit "新規登録" ,class:'btn btn-success ml-auto'%>
+    <% end %>
+  </div>
+  <div>
+    <table class="table table-bordered mt-5">
+      <tr>
+        <th>郵便番号</th>
+        <th>住所</th>
+        <th>宛名</th>
+        <th></th>
+      </tr>
   <% @addresses.each do |address| %>
-  <tr>
-    <td><%= address.postal_code %></td>
-    <td><%= address.address %></td>
-    <td><%= address.name %></td>
-    <td><%= link_to "編集する", edit_address_path(address.id) %>
-    <%= link_to "削除する", address_path(address.id), method: :delete, "data-confirm" => "本当に消しますか？" %></td>
-  </tr>
-  <% end %>
-</table>
+      <tr>
+        <td><%= address.postal_code %></td>
+        <td><%= address.address %></td>
+        <td><%= address.name %></td>
+        <td><%= link_to "編集する", edit_address_path(address.id), class:'btn btn-success' %>
+        <%= link_to "削除する", address_path(address.id), method: :delete, "data-confirm" => "本当に消しますか？" , class:'btn btn-danger'%></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+
+
