@@ -1,13 +1,22 @@
-<%= attachment_image_tag @item, :image, format: 'jpeg', size: '450x300' %>
-<h2><span><%= @item.name %></span></h2><br>
-<p><span><%= @item.introduction %></span></p>
-<% tax_with_price = (@item.price * 1.1).floor %>
-<p>￥<%= tax_with_price %>（税込）</p>
-<% if customer_signed_in? %>
-  <%= form_with model: @cart_item ,url: cart_items_path, method: :post do |f| %>
-  <%= f.hidden_field :item_id, :value => @item.id %>
-  <%= f.hidden_field :customer_id, :value => current_customer.id %>
-  <%= f.select :amount, *[1..10] %>
-  <%= f.submit "カートに入れる" %>
-  <% end %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="image">
+      <%= attachment_image_tag @item, :image, format: 'jpeg', size: '450x300' %>
+    </div>
+    <div class="contents m-5">
+      <h2><span><%= @item.name %></span></h2><br>
+      <p><span><%= @item.introduction %></span></p>
+        <% tax_with_price = (@item.price * 1.1).floor %>
+      <p>￥<%= tax_with_price %>（税込）</p>
+      <% if customer_signed_in? %>
+        <%= form_with model: @cart_item ,url: cart_items_path, method: :post do |f| %>
+          <%= f.hidden_field :item_id, :value => @item.id %>
+          <%= f.hidden_field :customer_id, :value => current_customer.id %>
+          <%= f.select :amount, *[1..10] %>
+          <%= f.submit "カートに入れる", class:'btn btn-success' %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
